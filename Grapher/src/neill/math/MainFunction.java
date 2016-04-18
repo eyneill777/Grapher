@@ -1,5 +1,8 @@
 package neill.math;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.w3c.dom.events.EventException;
 
 import neill.main.EvaluationOptions;
@@ -15,9 +18,11 @@ import net.sourceforge.jeval.function.FunctionResult;
 public class MainFunction implements Function
 {
 	String functionString;
+	Map<String, String> firstOrderFunctions = new HashMap<String, String>();
 	
 	public MainFunction(String functionString, Main main) 
 	{
+		fillFirstOrderFunctions();
 		this.functionString = Tools.formatStringVariable(functionString, EvaluationOptions.independantVariable);
 		main.getGraph().reset(this, main);
 	}
@@ -41,10 +46,20 @@ public class MainFunction implements Function
 			}
 		}
 	}
+	
+	private void fillFirstOrderFunctions()
+	{
+		firstOrderFunctions.put("Deriv", EvaluationOptions.independantVariable);
+	}
+	
+	private void doFirstOrderFunctions()
+	{
+		
+	}
 
 	@Override
 	public String getName() 
-	{
+	{ 
 		return EvaluationOptions.dependantVariable;
 	}
 	
